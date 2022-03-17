@@ -39,21 +39,24 @@ c.left = f;
 
 console.log(root.value);
 
-function createElement(value) {
+function createElement(node) {
   const nodeEl = document.createElement("div");
-  nodeEl.innerHTML = value;
+  nodeEl.innerHTML = node.value;
+  nodeEl.classList.add("node");
   document.body.appendChild(nodeEl);
 }
+
+createElement(root);
 
 const logDescendents = (node) => {
   const left = node.descendents[0];
   const right = node.descendents[1];
 
   if (left) {
-    createElement(left.value);
+    createElement(left);
   }
   if (right) {
-    createElement(left.value);
+    createElement(right);
   }
 
   if (left.descendents[0] && left.descendents[1]) {
