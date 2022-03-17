@@ -4,6 +4,7 @@ const RIGHT = 1;
 class TreeNode {
   constructor(value) {
     this.value = value;
+    this.level = 0;
     this.descendents = [];
   }
 
@@ -17,10 +18,12 @@ class TreeNode {
 
   set left(value) {
     this.descendents[LEFT] = value;
+    this.descendents[LEFT].level = this.level + 1;
   }
 
   set right(value) {
     this.descendents[RIGHT] = value;
+    this.descendents[RIGHT].level = this.level + 1;
   }
 }
 
@@ -42,8 +45,25 @@ console.log(root.value);
 function createElement(node) {
   const nodeEl = document.createElement("div");
   nodeEl.innerHTML = node.value;
-  nodeEl.classList.add("node");
-  document.body.appendChild(nodeEl);
+  if (node.level === 0) {
+    nodeEl.classList.add("root");
+    nodeEl.classList.add("node");
+    nodeEl.classList.add(node.level);
+    document.querySelector(".lvl0").appendChild(nodeEl);
+  } else if (node.level === 1) {
+    nodeEl.classList.add("node");
+    nodeEl.classList.add(node.level);
+    document.querySelector(".lvl1").appendChild(nodeEl);
+  } else if (node.level === 2) {
+    nodeEl.classList.add("node");
+    nodeEl.classList.add(node.level);
+    document.querySelector(".lvl2").appendChild(nodeEl);
+  } else if (node.level === 3) {
+    nodeEl.classList.add("node");
+    nodeEl.classList.add(node.level);
+    document.querySelector(".lvl2").appendChild(nodeEl);
+  }
+  nodeEl.style.margin = `0 ${Math.pow(6, node.level)}px`;
 }
 
 createElement(root);
@@ -61,6 +81,7 @@ const logDescendents = (node) => {
 
   if (left.descendents[0] && left.descendents[1]) {
     logDescendents(left);
+    console.log();
   }
 
   if (right.descendents[0] && right.descendents[1]) {
