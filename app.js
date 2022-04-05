@@ -78,12 +78,23 @@ function createElement(node) {
   }
 }
 
+const findNode = (node, value) => {
+  if (!node) {
+    return null;
+  }
+
+  if ()
+};
+
 const createNode = (event) => {
-  console.log(event.target[0].value);
-  console.log(event.target[1].checked);
-  console.log(event.target[2].checked);
-  console.log(event.target[3].value);
   event.preventDefault();
+  const parent = event.target[0].value;
+  const left = event.target[1].checked;
+  const right = event.target[2].checked;
+  const node = event.target[3].value;
+
+  if (left) {
+  }
 };
 
 const height = treeHeight(root);
