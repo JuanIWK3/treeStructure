@@ -83,7 +83,11 @@ const findNode = (node, value) => {
     return null;
   }
 
-  if ()
+  if (node.value == value) {
+    return node;
+  }
+
+  return findNode(node(left), value) || findNode(node(right), value);
 };
 
 const createNode = (event) => {
