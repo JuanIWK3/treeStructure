@@ -5,7 +5,7 @@ class TreeNode {
   constructor(value) {
     this.value = value;
     this.level = 0;
-    this.descendents = [];
+    this.descendents = [null, null];
   }
 
   get left() {
@@ -43,21 +43,6 @@ const m = new TreeNode("M");
 const n = new TreeNode("N");
 const o = new TreeNode("O");
 
-root.left = b;
-root.right = c;
-b.left = d;
-b.right = e;
-c.left = f;
-c.right = g;
-d.left = h;
-d.right = i;
-e.left = j;
-e.right = k;
-f.left = l;
-f.right = m;
-g.left = n;
-g.right = o;
-
 console.log(root.value);
 
 const treeHeight = (node) => {
@@ -93,29 +78,19 @@ function createElement(node) {
   }
 }
 
-createElement(root);
-
-const logDescendents = (node) => {
-  const left = node.descendents[0];
-  const right = node.descendents[1];
-
-  if (left) {
-    createElement(left);
-  }
-  if (right) {
-    createElement(right);
-  }
-
-  if (left.descendents[0] && left.descendents[1]) {
-    logDescendents(left);
-    console.log();
-  }
-
-  if (right.descendents[0] && right.descendents[1]) {
-    logDescendents(right);
-  }
+const createNode = (event) => {
+  console.log(event.target[0].value);
+  console.log(event.target[1].checked);
+  console.log(event.target[2].checked);
+  console.log(event.target[3].value);
+  event.preventDefault();
 };
 
-console.log(treeHeight(root));
+const height = treeHeight(root);
+for (let i = 0; i < height; i++) {
+  const lvl = document.createElement("div");
+  lvl.classList.add(`lvl${i}`);
+  document.querySelector(".tree").appendChild(lvl);
+}
 
-logDescendents(root);
+createElement(root);
