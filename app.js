@@ -33,40 +33,90 @@ const c = new TreeNode("C");
 const d = new TreeNode("D");
 const e = new TreeNode("E");
 const f = new TreeNode("F");
+const g = new TreeNode("G");
+const h = new TreeNode("H");
+const i = new TreeNode("I");
+const j = new TreeNode("J");
+const k = new TreeNode("K");
+const l = new TreeNode("L");
+const m = new TreeNode("M");
+const n = new TreeNode("N");
+const o = new TreeNode("O");
+
+
 
 root.left = b;
 root.right = c;
 b.left = d;
 b.right = e;
 c.left = f;
+c.right = g;
+d.left = h;
+d.right = i;
+e.left = j;
+e.right = k;
+f.left = l;
+f.right = m;
+g.left = n;
+g.right = o;
+
 
 console.log(root.value);
 
+
+const treeHeight = (node) => {
+  if (!node) {
+    return 0;
+  }
+
+  return 1 + Math.max(treeHeight(node.left), treeHeight(node.right));
+}
+
 function createElement(node) {
+  const margins = []
+  const height = treeHeight(root);
+  for (let i = 1; i < height +1; i++) {
+    margins.push(i * 30);    
+  }  
+  margins.reverse()
+
   const nodeEl = document.createElement("div");
   nodeEl.innerHTML = node.value;
+  for (let i = 0; i < height; i++) {
+    if (node.level === i) {
+      
+  }
   if (node.level === 0) {
     nodeEl.classList.add("root");
     nodeEl.classList.add("node");
     nodeEl.classList.add(node.level);
     document.querySelector(".lvl0").appendChild(nodeEl);
+    nodeEl.style.margin = `0 ${margins[0]}px`
   } else if (node.level === 1) {
     nodeEl.classList.add("node");
     nodeEl.classList.add(node.level);
     document.querySelector(".lvl1").appendChild(nodeEl);
+    nodeEl.style.margin = `0 ${margins[1]}px`
   } else if (node.level === 2) {
     nodeEl.classList.add("node");
     nodeEl.classList.add(node.level);
     document.querySelector(".lvl2").appendChild(nodeEl);
+    nodeEl.style.margin = `0 ${margins[2]}px`
   } else if (node.level === 3) {
     nodeEl.classList.add("node");
     nodeEl.classList.add(node.level);
-    document.querySelector(".lvl2").appendChild(nodeEl);
-  }
-  nodeEl.style.margin = `0 ${Math.pow(6, node.level)}px`;
+    document.querySelector(".lvl3").appendChild(nodeEl);
+    nodeEl.style.margin = `0 ${margins[3]}px`
+  } else if (node.level === 4) {
+    nodeEl.classList.add("node");
+    nodeEl.classList.add(node.level);
+    document.querySelector(".lvl4").appendChild(nodeEl);
+    nodeEl.style.margin = `0 ${margins[3]}px`
+  } 
 }
 
 createElement(root);
+
 
 const logDescendents = (node) => {
   const left = node.descendents[0];
@@ -88,5 +138,7 @@ const logDescendents = (node) => {
     logDescendents(right);
   }
 };
+
+console.log(treeHeight(root))
 
 logDescendents(root);

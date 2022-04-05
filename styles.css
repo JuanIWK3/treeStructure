@@ -16,6 +16,7 @@ body {
 
 .lvl {
   display: flex;
+  margin-bottom: 32px;
 }
 
 .node {
@@ -27,4 +28,5 @@ body {
   align-items: center;
   justify-content: center;
   color: #fff;
+ 
 }
